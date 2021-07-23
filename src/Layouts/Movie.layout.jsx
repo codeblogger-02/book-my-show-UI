@@ -22,7 +22,7 @@ import { MovieContext } from "../context/movie.context"
            setMovie(getMovieData.data);
         };
         requestMovie();
-    },[]);
+    },[id]);
 
     return (
         <>

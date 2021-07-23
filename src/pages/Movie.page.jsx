@@ -23,6 +23,8 @@ import { MovieContext } from '../context/movie.context';
   const {id} = useParams();
   const {movie} = useContext(MovieContext);
   const[cast,setCast] = useState([]);
+  const[similarMovies,setSimilarMovies] = useState([]);
+  const[recommended,setRecommended] = useState([]);
 
   useEffect(() => {
     const requestCast = async () => {
@@ -30,7 +32,23 @@ import { MovieContext } from '../context/movie.context';
       setCast(getCast.data.cast);
     };
     requestCast();
-  },[]);
+  },[id]);
+
+  useEffect(() => {
+    const requestSimilarMovies = async () => {
+      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+      setSimilarMovies(getSimilarMovies.data.results);
+    };
+    requestSimilarMovies();
+  },[id]);
+
+  useEffect(() => {
+    const requestRecommendedMovies = async () => {
+      const getRecommendedMovies = await axios.get(`/movie/${id}/recommendations`);
+      setRecommended(getRecommendedMovies.data.results);
+    };
+    requestRecommendedMovies();
+  },[id]);
 
     const settings = {
         infinite: false,
@@ -167,7 +185,7 @@ import { MovieContext } from '../context/movie.context';
              </div>
          
          <div className="my-8">
-         <PosterSlider config={settings} images={TempPosters} title="You might also like" isDark={false}/>
+         <PosterSlider config={settings} images={similarMovies} title="You might also like" isDark={false}/>
          </div>
 
          <div className="my-8">
@@ -175,7 +193,7 @@ import { MovieContext } from '../context/movie.context';
              </div>
 
          <div className="my-8">
-         <PosterSlider config={settings} images={TempPosters} title="BMS XCLUSIVE" isDark={false}/>
+         <PosterSlider config={settings} images={recommended} title="BMS XCLUSIVE" isDark={false}/>
          </div>
 
          </div>
