@@ -1,7 +1,6 @@
-import React from 'react'
+import {FaCcVisa , FaCcApplePay} from "react-icons/fa";
+import React, {useContext , useState} from 'react';
 
-//icons
-import {FaCcVisa , FaCcApplePay} from "react-icons/fa"
 
 
 //component
@@ -13,7 +12,12 @@ import PosterSlider from "../Components/PosterSlider/PosterSlider.component";
 import TempPosters from "../config/TempPosters.config";
 
 
+//context
+import { MovieContext } from '../context/movie.context';
+
  const Movie = () => {
+
+  const {movie} = useContext(MovieContext);
 
     const settings = {
         infinite: false,
@@ -55,7 +59,7 @@ import TempPosters from "../config/TempPosters.config";
          <div className="my-5 container px-4 lg:ml-20 lg:w-2/3">
              <div className="flex flex-col items-start gap-3">
                  <h2 className="text-gray-800 font-bold text-2xl">About the movie</h2>
-                  <p>Bruce Wayne and Diana Prince try to bring the metahumans of Earth together after the death of Clark Kent. Meanwhile, Darkseid sends Steppenwolf to Earth with an army to subjugate humans.</p>
+                  <p>{movie.overview}</p>
              </div>
              <div className="my-8">
              <hr />
@@ -128,4 +132,4 @@ import TempPosters from "../config/TempPosters.config";
 };
 
 
-export default Movie
+export default Movie;
