@@ -12,9 +12,11 @@ const MovieProvider = ({children}) => {
         poster_path:"",
     });
 
-    return <MovieContext.Provider value={{movie , setMovie}}>
+    return (
+    <MovieContext.Provider value={{movie , setMovie}}>
         {children}
     </MovieContext.Provider>
+    );
 
 };
 
